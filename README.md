@@ -5,7 +5,7 @@ Private website's repository
 ## Requirements
 
 - flask
-  - mysql-connector
+- mysql-connector
 
 ## Example of runscript
 
