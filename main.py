@@ -104,5 +104,8 @@ def add_page():
   addentry(code, description)
   return redirect("/")
 
+
+
 if __name__ == '__main__':
+  logging.basicConfig(filename='/var/log/barcode-server.log',level=logging.INFO)
   app.run(host="0.0.0.0",port=5050)
