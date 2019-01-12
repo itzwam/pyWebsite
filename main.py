@@ -78,7 +78,7 @@ def search_page():
   if not query:
     errortext="Il y a un problème avec la requete"
     fh = open('./datas/search.err.html')
-    return fh.read().format(error=errortext)
+    return header + fh.read().format(error=errortext) + footer
 
   answer = getentry(query)
   error = answer.get('error',False)
@@ -86,10 +86,10 @@ def search_page():
   if error:
     errortext=answer.get('text','Unknow error')
     fh = open('./datas/search.err.html')
-    return fh.read().format(error=errortext)
+    return header + fh.read().format(error=errortext) + footer
   
   fh = open('./datas/search.html')
-  return fh.read().format(**answer)
+  return header + fh.read().format(**answer) + footer
 
 def add_page():
   code = request.form.get('code', None)
