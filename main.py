@@ -3,7 +3,7 @@
 import sys
 import os
 from flask import Flask, abort, request, Response, redirect
-import mysql.connector
+import mysql.connector # pylint: disable=F0401
 import cgi
 import logging
 
