@@ -108,5 +108,5 @@ def add_page():
 
 
 if __name__ == '__main__':
-  logging.basicConfig(filename='/var/log/barcode-server.log',level=logging.INFO)
-  app.run(host="0.0.0.0",port=5050)
+  logging.basicConfig(filename=os.environ.get('BARCODE_HTTP_LOG','/dev/null'),level=logging.INFO)
+  app.run(host=os.environ.get('BARCODE_HTTP_HOST',"127.0.0.1"),port=int(os.environ.get('BARCODE_HTTP_PORT',5050)))
