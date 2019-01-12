@@ -106,8 +106,6 @@ def add_page():
   addentry(code, description)
   return redirect("/")
 
-
-
 if __name__ == '__main__':
   logging.basicConfig(filename=os.environ.get('BARCODE_HTTP_LOG','/dev/null'),level=logging.INFO)
   app.run(host=os.environ.get('BARCODE_HTTP_HOST',"127.0.0.1"),port=int(os.environ.get('BARCODE_HTTP_PORT',5050)))
