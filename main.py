@@ -5,6 +5,7 @@ import os
 from flask import Flask, abort, request, Response, redirect
 import mysql.connector
 import cgi
+import logging
 
 header = open('./datas/header.html','r').read()
 footer = open('./datas/footer.html','r').read()
