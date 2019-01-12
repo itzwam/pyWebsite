@@ -14,4 +14,4 @@ export BARCODE_MYSQL_PASS="p4ssw0rd"
 export BARCODE_MYSQL_DBNAME="barcode"
 
 python main.py
-``` 
+```
