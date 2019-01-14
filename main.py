@@ -38,7 +38,7 @@ def getentry(code):
       'text' : "Le code n'a pas été trouvé dans la base de donnée"
     }
   except Exception as e:
-    pass
+    print(e)
 
 def addentry(code, description):
   try:
