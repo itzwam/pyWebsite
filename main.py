@@ -19,20 +19,21 @@ mydb = mysql.connector.connect(
   user=os.environ.get('BARCODE_MYSQL_USER'),
   passwd=os.environ.get('BARCODE_MYSQL_PASS'),
   database=os.environ.get('BARCODE_MYSQL_DBNAME')
-
 )
 
 def getentry(code):
-  mycursor = mydb.cursor()
-  mycursor.execute("SELECT id, code, description FROM info where code = '{}'".format(code))
-  myresult = mycursor.fetchall()
   try :
+    mycursor = mydb.cursor()
+    mycursor.execute("SELECT id, code, description FROM info where code = '{}'".format(code))
+    myresult = mycursor.fetchall()
     myresult = myresult[0]
   except IndexError:
     return {
       'error': True,
       'text' : "Le code n'a pas été trouvé dans la base de donnée"
     }
+  except Exception:
+    pass
   result = {
     'id' : myresult[0],
     'code' : myresult[1],
