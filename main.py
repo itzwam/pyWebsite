@@ -13,23 +13,6 @@ footer = open('./datas/footer.html','r').read()
 
 reload(sys)
 sys.setdefaultencoding('utf8')
-  
-def mysqlSELECT(querry):
-  mydb = mysql.connector.connect(
-    host=os.environ.get('BARCODE_MYSQL_HOST'),
-    user=os.environ.get('BARCODE_MYSQL_USER'),
-    passwd=os.environ.get('BARCODE_MYSQL_PASS'),
-    database=os.environ.get('BARCODE_MYSQL_DBNAME')
-  )
-  mycursor = mydb.cursor()
-  mycursor.execute(querry)
-  result = myresult = mycursor.fetchall()
-  mydb.close()
-  return result
-
-def mysqlINSERT(querry)
-  
-
 
 def getentry(code):
   try :
