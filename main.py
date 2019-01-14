@@ -27,6 +27,11 @@ def getentry(code):
     myresult = mycursor.execute("SELECT id, code, description FROM info where code = '{}'".format(code))
     mydb.close()
     result = myresult[0]
+  return {
+    'id' : result[0],
+    'code' : result[1],
+    'description' : result[2],
+  }
   except IndexError:
     return {
       'error': True,
@@ -34,11 +39,6 @@ def getentry(code):
     }
   except Exception as e:
     pass
-  return {
-    'id' : myresult[0],
-    'code' : myresult[1],
-    'description' : myresult[2],
-  }
 
 def addentry(code, description):
   try:
