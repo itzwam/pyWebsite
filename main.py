@@ -38,6 +38,10 @@ def getentry(code):
     }
   except Exception as e:
     print(e)
+    return {
+      'error': True,
+      'text' : "Il y a une erreur dans la base de donnée, merci de reessayer plus tard."
+    }
 
 def addentry(code, description):
   try:
