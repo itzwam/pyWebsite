@@ -14,19 +14,23 @@ footer = open('./datas/footer.html','r').read()
 reload(sys)
 sys.setdefaultencoding('utf8')
   
-mydb = mysql.connector.connect(
-  host=os.environ.get('BARCODE_MYSQL_HOST'),
-  user=os.environ.get('BARCODE_MYSQL_USER'),
-  passwd=os.environ.get('BARCODE_MYSQL_PASS'),
-  database=os.environ.get('BARCODE_MYSQL_DBNAME')
-)
+def mysqlSELECT(querry):
+  mydb = mysql.connector.connect(
+    host=os.environ.get('BARCODE_MYSQL_HOST'),
+    user=os.environ.get('BARCODE_MYSQL_USER'),
+    passwd=os.environ.get('BARCODE_MYSQL_PASS'),
+    database=os.environ.get('BARCODE_MYSQL_DBNAME')
+  )
+  mycursor = mydb.cursor()
+  mycursor.execute(querry)
+  result = myresult = mycursor.fetchall()
+  mydb.close()
+  return result
+
 
 def getentry(code):
   try :
-    mycursor = mydb.cursor()
-    mycursor.execute("SELECT id, code, description FROM info where code = '{}'".format(code))
-    myresult = mycursor.fetchall()
-    myresult = myresult[0]
+    myresult = mysqlSELECT("SELECT id, code, description FROM info where code = '{}'".format(code))[0]
   except IndexError:
     return {
       'error': True,
