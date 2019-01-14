@@ -15,7 +15,6 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 def getentry(code):
-  result = 0
   try :
     mydb = mysql.connector.connect(
       host=os.environ.get('BARCODE_MYSQL_HOST'),
@@ -25,8 +24,8 @@ def getentry(code):
     )
     mycursor = mydb.cursor()
     myresult = mycursor.execute("SELECT id, code, description FROM info where code = '{}'".format(code))
-    mydb.close()
     result = myresult[0]
+    mydb.close()
     return {
       'id' : result[0],
       'code' : result[1],
