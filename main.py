@@ -27,36 +27,52 @@ def mysqlSELECT(querry):
   mydb.close()
   return result
 
+def mysqlINSERT(querry)
+  
+
 
 def getentry(code):
   try :
-    myresult = mysqlSELECT("SELECT id, code, description FROM info where code = '{}'".format(code))[0]
+    mydb = mysql.connector.connect(
+      host=os.environ.get('BARCODE_MYSQL_HOST'),
+      user=os.environ.get('BARCODE_MYSQL_USER'),
+      passwd=os.environ.get('BARCODE_MYSQL_PASS'),
+      database=os.environ.get('BARCODE_MYSQL_DBNAME')
+    )
+    mycursor = mydb.cursor()
+    myresult = mycursor.execute("SELECT id, code, description FROM info where code = '{}'".format(code))
+    mydb.close()
+    myresult = myresult[0]
   except IndexError:
     return {
       'error': True,
       'text' : "Le code n'a pas été trouvé dans la base de donnée"
     }
-  except Exception:
+  except Exception as e:
     pass
-  result = {
+  return {
     'id' : myresult[0],
     'code' : myresult[1],
     'description' : myresult[2],
   }
-  return result
 
 def addentry(code, description):
-  mycursor = mydb.cursor()
-
-  sql = "INSERT INTO info (code, description) VALUES (%s, %s)"
-  val = (code, description)
   try:
+    mydb = mysql.connector.connect(
+      host=os.environ.get('BARCODE_MYSQL_HOST'),
+      user=os.environ.get('BARCODE_MYSQL_USER'),
+      passwd=os.environ.get('BARCODE_MYSQL_PASS'),
+      database=os.environ.get('BARCODE_MYSQL_DBNAME')
+    )
+    mycursor = mydb.cursor()
+    sql = "INSERT INTO info (code, description) VALUES (%s, %s)"
+    val = (code, description)
     mycursor.execute(sql, val)
+    mydb.commit()
+    mydb.close()
   except Exception as e:
     print(e)
     return 1
-  mydb.commit()
-  
   print(mycursor.rowcount, "record inserted.")
 
 app = Flask(__name__)
