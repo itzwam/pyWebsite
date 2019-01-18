@@ -67,7 +67,8 @@ app = Flask(__name__)
 @app.route('/', defaults={'path': 'index.html'}, methods=['GET','POST'])
 @app.route('/<path:path>', methods=['GET','POST'])
 def catch_all(path):  
-  if path == "search":
+  print(path)
+  if path == "/db/search":
     return search_page()
   if path == "add":
     return add_page()
