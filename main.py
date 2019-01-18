@@ -82,21 +82,21 @@ def catch_all(path):
 
 def search_page():
   query = request.args.get('code', None)
+  
 
   if not query:
-    errortext="Il y a un problème avec la requete"
-    fh = open('./datas/search.err.html')
-    return header + fh.read().format(error=errortext) + footer
+    fh = open('./datas/database/searchform.html', 'r')  
+    return header + fh.read() + footer
 
   answer = getentry(query)
   error = answer.get('error',False)
   
   if error:
     errortext=answer.get('text','Unknow error')
-    fh = open('./datas/search.err.html')
+    fh = open('./datas/database/searchresult.err.html')
     return header + fh.read().format(error=errortext) + footer
   
-  fh = open('./datas/search.html')
+  fh = open('./datas/database/searchresult.html')
   return header + fh.read().format(**answer) + footer
 
 def add_page():
@@ -105,7 +105,7 @@ def add_page():
 
   print("code : {} | desc : {}".format(code, description))
   if (not code) or (not description):
-    fh = open('./datas/add.html', 'r')  
+    fh = open('./datas/database/addform.html', 'r')  
     return header + fh.read() + footer
 
   description = cgi.escape(description)
