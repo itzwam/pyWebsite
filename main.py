@@ -70,7 +70,7 @@ def catch_all(path):
   print(path)
   if path == "/db/search":
     return search_page()
-  if path == "add":
+  if path == "/db/add":
     return add_page()
   try:
     fh = open('./datas/'+path, 'r')
