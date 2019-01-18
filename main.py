@@ -68,9 +68,9 @@ app = Flask(__name__)
 @app.route('/<path:path>', methods=['GET','POST'])
 def catch_all(path):  
   print(path)
-  if path == "/db/search":
+  if path == "db/search":
     return search_page()
-  if path == "/db/add":
+  if path == "db/add":
     return add_page()
   try:
     fh = open('./datas/'+path, 'r')
