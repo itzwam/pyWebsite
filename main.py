@@ -24,13 +24,14 @@ def getentry(code):
       database=os.environ.get('BARCODE_MYSQL_DBNAME')
     )
     mycursor = mydb.cursor()
-    mycursor.execute("SELECT id, code, description FROM info where code = '{}'".format(code))
+    mycursor.execute("SELECT id, code, description, quantity FROM info where code = '{}'".format(code))
     result = mycursor.fetchall()[0]
     mydb.close()
     return {
       'id' : result[0],
       'code' : result[1],
       'description' : result[2],
+      'quantity' : result[3],
     }
   except IndexError:
     return {

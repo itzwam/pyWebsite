@@ -9,7 +9,8 @@ USE `barcode`;
 
 CREATE TABLE `info` (
   `id` int(11) NOT NULL,
-  `code` varchar(16) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT '0',
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
