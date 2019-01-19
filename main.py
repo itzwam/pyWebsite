@@ -34,13 +34,13 @@ def getentry(code):
     }
   except IndexError:
     return {
-      'error': True,
+      'error': 404,
       'text' : "Le code n'a pas été trouvé dans la base de donnée"
     }
   except Exception as e:
     print(e)
     return {
-      'error': True,
+      'error': 500,
       'text' : "Il y a une erreur dans la base de donnée, merci de reessayer plus tard."
     }
 
