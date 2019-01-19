@@ -53,7 +53,7 @@ $("#insert-code").blur(function(){
         },
         success:function(response) {
             obj = JSON.parse(response)
-            if (obj.error == Null && obj.description !== Null) {
+            if (obj.error == null && obj.description !== null) {
                 $("#insert-description").attr("placeholder", obj.description);
             }
             else {
