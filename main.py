@@ -161,9 +161,8 @@ app = Flask(__name__)
 @app.route('/<path:path>', methods=['GET','POST'])
 def catch_all(path):  
   if path == "index.html":
-    catapi = requests.get("https://api.thecatapi.com/v1/images/search").json()[0]
     fh = open('./datas/index.html', 'r')
-    return header + fh.read().format(**catapi) + footer
+    return header + fh.read() + footer
   
   if path == "db/search":
     return dbsearch_page()
