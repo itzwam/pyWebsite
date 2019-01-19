@@ -139,7 +139,7 @@ def stockadd_page():
   print('adding {} items to stock'.format(qty))
   print('code : {} | qty : {}'.format(code, qty))
 
-  updatestock(code, qty@)
+  updatestock(code, qty)
 
   return redirect("/")
 
