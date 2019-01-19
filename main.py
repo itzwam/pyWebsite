@@ -111,13 +111,13 @@ def stockadd_page():
 
   print(json.dumps(request.form))
 
-  if not request.form.get('add', None):
+  if not request.form.get('add', None) === '':
     fh = open('./datas/stock/addform.html', 'r')  
     return header + fh.read() + footer
 
   print('adding {qty} items to stock')
   print('code : {} | qty : {}'.format(code, qty))
-  
+
   return redirect("/")
 
 def apigetinfos_page():
