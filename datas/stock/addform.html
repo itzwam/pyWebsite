@@ -33,7 +33,7 @@ $("#insert-code").blur(function(){
         success:function(response) {
             obj = JSON.parse(response)
             if (obj.error == null && obj.description !== null) {
-                $("#insert-description").attr("placeholder", obj.description);
+                $("#insert-description").attr("placeholder", obj.description + ' Stock: ' + obj.quantity);
             }
             else {
                 $("#insert-description").attr("placeholder", "?");
