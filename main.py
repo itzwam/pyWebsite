@@ -138,7 +138,7 @@ def stock_page(remove=False):
     return header + fh.read() + footer
 
   qty = qty if len(qty) != 0 else 1 # qty = qty if defined, else default is 1
-  qty = qty if not remove else 0 - qty  # if remove => qty = -qty
+  qty = qty if not remove else -qty  # if remove => qty = -qty
   
   print('adding {} items to stock'.format(qty))
   print('code : {} | qty : {}'.format(code, qty))
