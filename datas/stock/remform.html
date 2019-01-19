@@ -5,11 +5,13 @@
         <form action="rem" method="post">
             
             <div class="form-row">
-                <div class="col">
+                <div class="form-group col-md-6">
+                    <label for="insert-code">Code</label>
                     <input type="text" class="form-control" id="insert-code" name="code" aria-describedby="code" placeholder="Entrez votre code" required>
                 </div>
-                <div class="col">
-                    <input type="text" class="form-control" id="actual-qty" name="" aria-describedby="qty" placeholder="Qty" readonly>
+                <div class="form-group col-md-6">
+                    <label for="actual-qty">Quantité actuelle</label>
+                    <input type="text" class="form-control" id="actual-qty" name="" aria-describedby="qty" placeholder="?" readonly>
                 </div>
               </div>
             <div class="form-group">
@@ -43,12 +45,12 @@ $("#insert-code").blur(function(){
                 }
                 else {
                     $("#actual-description").attr("placeholder", "?");
-                    $("#actual-qty").attr("placeholder", "Qty ?");
+                    $("#actual-qty").attr("placeholder", "?");
                 }
             },
             error:function(){
                 $("#actual-description").attr("placeholder", "?");
-                $("#actual-qty").attr("placeholder", "Qty ?");
+                $("#actual-qty").attr("placeholder", "?");
         }
         })
 });
