@@ -37,9 +37,32 @@
        }
     })
 
+
+    $("#insert-description").attr("placeholder", "jdfbgjdfs");
 -->
 <script type="text/javascript">
 $("#insert-code").blur(function(){
-  alert("This input field has lost its focus.");
+    console.log("blahblah")
+
+    $.ajax({
+        url:"/api/getinfos",
+        method:"POST",
+
+        data:{
+            code: $("#insert-code").val(),
+        },
+        success:function(response) {
+            obj = JSON.parse(response)
+            if (obj.error == Null && obj.description !== Null) {
+                $("#insert-description").attr("placeholder", obj.description);
+            }
+            else {
+                $("#insert-description").attr("placeholder", "?");
+            }
+        },
+        error:function(){
+            $("#insert-description").attr("placeholder", "?");
+       }
+    })
 });
 </script>
