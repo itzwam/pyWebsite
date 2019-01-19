@@ -125,17 +125,20 @@ def dbadd_page():
 
 
 
-def stockadd_page():
+def stock_page(remove=False):
   code = request.form.get('code', None)
   qty = request.form.get('qty', None)
 
   print(json.dumps(request.form))
 
   if not request.form.get('add', None) == '':
-    fh = open('./datas/stock/addform.html', 'r')  
+    file = "addform.html" if not remove else "remform.html"
+    fh = open('./datas/stock/'+ file, 'r')
     return header + fh.read() + footer
 
   qty = qty if len(qty) != 0 else 1 # qty = qty if defined, else default is 1
+  qty = qty if not remove else 0 - qty  # if remove => qty = -qty
+  
   print('adding {} items to stock'.format(qty))
   print('code : {} | qty : {}'.format(code, qty))
 
@@ -171,7 +174,9 @@ def catch_all(path):
     return dbadd_page()
 
   if path == "stock/add":
-    return stockadd_page()
+    return stock_page()
+  if path == "stock/rem":
+    return stock_page(remove=True)
 
   if path == "api/getinfos":
     return apigetinfos_page()
