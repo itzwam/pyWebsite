@@ -141,7 +141,7 @@ def apigetinfos_page():
   query = request.form.get('code', None)
 
   if not query:  
-    return jsonify({
+    return json.dumps({
       'error': 400,
       'text': "Malformed request: missing code"
     })
