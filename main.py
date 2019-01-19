@@ -39,7 +39,7 @@ def getentry(code):
       'text' : "Le code n'a pas été trouvé dans la base de donnée"
     }
   except Exception as e:
-    print(e)
+    logging.error(e)
     return {
       'error': 500,
       'text' : "Il y a une erreur dans la base de donnée, merci de reessayer plus tard."
@@ -64,7 +64,6 @@ def addentry(code, description):
   except Exception as e:
     logging.error(e)
     return 1
-  print(mycursor.rowcount, "record inserted.")
 
 def updatestock(code, qty):
   try:
@@ -83,7 +82,6 @@ def updatestock(code, qty):
   except Exception as e:
     logging.error(e)
     return 1
-  print(mycursor.rowcount, "record updated.")
 
 
 
@@ -111,14 +109,11 @@ def dbadd_page():
   code = request.form.get('code', None)
   description = request.form.get('description', None)
 
-  print("code : {} | desc : {}".format(code, description))
   if (not code) or (not description):
     fh = open('./datas/database/addform.html', 'r')  
     return header + fh.read() + footer
 
   description = cgi.escape(description)
-  print('adding code and description to database')
-  print('code : {} | desc : {}'.format(code, description))
   addentry(code, description)
   return redirect("/")
 
@@ -130,7 +125,6 @@ def stock_page(remove=False):
     qty = int(request.form.get('qty', 0))
   except ValueError:
     qty = 1
-  print(json.dumps(request.form))
 
   if not request.form.get('go', None) == '':
     file = "addform.html" if not remove else "remform.html"
