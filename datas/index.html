@@ -7,13 +7,16 @@
                     <label for="insert-code">Code</label>
                     <input type="text" class="form-control" id="insert-code" name="code" aria-describedby="code" placeholder="Entrez votre code" required>
                 </div>
-                <div class="form-group">
-                    <label for="insert-description">Description</label>
-                    <input type="text" class="form-control" id="insert-description" name="description" aria-describedby="description" placeholder="?" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="insert-qty">Quantité</label>
-                    <input type="text" class="form-control" id="insert-qty" name="qty" aria-describedby="qty" placeholder="?" readonly>
+
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <label for="insert-description">Description</label>
+                        <input type="text" class="form-control" id="insert-description" name="description" aria-describedby="description" placeholder="?" readonly>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="insert-qty">Quantité</label>
+                        <input type="text" class="form-control" id="insert-qty" name="qty" aria-describedby="qty" placeholder="?" readonly>
+                    </div>
                 </div>
                 <button type="button" class="btn btn-success" id="go" name="go">Rechercher</button>
             </form>
