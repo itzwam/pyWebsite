@@ -126,11 +126,13 @@ def dbadd_page():
 
 def stock_page(remove=False):
   code = request.form.get('code', None)
-  qty = request.form.get('qty', None)
-
+  try:
+    qty = request.form.get('qty', None)
+  except ValueError:
+    qty = 1
   print(json.dumps(request.form))
 
-  if not request.form.get('add', None) == '':
+  if not request.form.get('go', None) == '':
     file = "addform.html" if not remove else "remform.html"
     fh = open('./datas/stock/'+ file, 'r')
     return header + fh.read() + footer
