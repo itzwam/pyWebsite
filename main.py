@@ -127,7 +127,7 @@ def dbadd_page():
 def stock_page(remove=False):
   code = request.form.get('code', None)
   try:
-    qty = int(request.form.get('qty', None))
+    qty = int(request.form.get('qty', 0))
   except ValueError:
     qty = 1
   print(json.dumps(request.form))
