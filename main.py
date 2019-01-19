@@ -66,6 +66,26 @@ def addentry(code, description):
     return 1
   print(mycursor.rowcount, "record inserted.")
 
+def updatestock(code, qty):
+  try:
+    mydb = mysql.connector.connect(
+      host=os.environ.get('BARCODE_MYSQL_HOST'),
+      user=os.environ.get('BARCODE_MYSQL_USER'),
+      passwd=os.environ.get('BARCODE_MYSQL_PASS'),
+      database=os.environ.get('BARCODE_MYSQL_DBNAME')
+    )
+    mycursor = mydb.cursor()
+    sign = "+" if qty > 0 else "-"
+    sql = "UPDATE info SET quantity = quantity %s %s WHERE code = %s"
+    val = (sign, qty, code)
+    mycursor.execute(sql, val)
+    mydb.commit()
+    mydb.close()
+  except Exception as e:
+    logging.error(e)
+    return 1
+  print(mycursor.rowcount, "record updated.")
+
 
 
 def dbsearch_page():
@@ -118,6 +138,8 @@ def stockadd_page():
   qty = qty if len(qty) != 0 else 1 # qty = qty if defined, else default is 1
   print('adding {} items to stock'.format(qty))
   print('code : {} | qty : {}'.format(code, qty))
+
+  updatestock(code, qty@)
 
   return redirect("/")
 
