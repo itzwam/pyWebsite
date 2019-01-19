@@ -1,7 +1,50 @@
     <main class="container">
-        <section class="mt-4">
-            <h2>Miaou</h2>
-
-            <img src="{url}" class="img-fluid" alt="Meow">
+        <section class="mt-5">
+            <h2>Rechercher dans le stock</h2>
+            <!-- Formulaire -->
+            <form>
+                <div class="form-group">
+                    <label for="insert-code">Code</label>
+                    <input type="text" class="form-control" id="insert-code" name="code" aria-describedby="code" placeholder="Entrez votre code" required>
+                </div>
+                <div class="form-group">
+                    <label for="insert-description">Description</label>
+                    <input type="text" class="form-control" id="insert-description" name="description" aria-describedby="description" placeholder="?" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="insert-qty">Quantité</label>
+                    <input type="text" class="form-control" id="insert-qty" name="qty" aria-describedby="qty" placeholder="?" readonly>
+                </div>
+                <button type="submit" class="btn btn-success" id="go" name="go">Ajouter</button>
+            </form>
         </section>
     </main>
+    <script type="text/javascript">
+    $("#go").click(function(){
+        console.log("blahblah")
+
+        $.ajax({
+            url:"/api/getinfos",
+            method:"POST",
+
+            data:{
+                code: $("#insert-code").val(),
+            },
+            success:function(response) {
+                obj = JSON.parse(response)
+                if (obj.error == null) {
+                    $("#insert-description").attr("placeholder", obj.description);
+                    $("#insert-qty").attr("placeholder", obj.quantity);
+                }
+                else {
+                    $("#insert-description").attr("placeholder", "?");
+                    $("#insert-qty").attr("placeholder", "?");
+                }
+            },
+            error:function(){
+                $("#insert-description").attr("placeholder", "?");
+                $("#insert-qty").attr("placeholder", "?");
+        }
+        })
+    });
+    </script>
