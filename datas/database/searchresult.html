@@ -1,11 +1,8 @@
-    <main class="container mt-4">
-        <div class="card" style="width: 50rem;">
-            <div class="card-body">
-                <h5 class="card-title">{code}</h5>
-                <!-- Object ID in database: {id} -->
-                <p class="card-text">{description}</p>
-                <a href="/index.html" class="card-link">Revenir à l'accueil</a>
-            </div>
+    <main class="container">
+        <section class="mt-4">
+            <h2>Resultat de la recherche</h2>
+
+            <!-- Resultat -->
             <form action="/db/search" method="GET">
                 <div class="form-group row">
                   <label for="staticCode" class="col-sm-2 col-form-label">Code</label>
@@ -25,7 +22,7 @@
                     <input type="text" readonly class="form-control-plaintext" id="staticQty" value="{quantity}">
                   </div>
                 </div>
+                <button type="submit" class="btn btn-primary">Revenir a l'accueil</button>
             </form>
-            <button type="submit" class="btn btn-primary">Revenir a l'accueil</button>
-        </div>
+        </section>
     </main>
