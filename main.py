@@ -76,8 +76,8 @@ def updatestock(code, qty):
     )
     mycursor = mydb.cursor()
     sign = "+" if qty > 0 else "-"
-    sql = "UPDATE info SET quantity = quantity %s %s WHERE code = %s"
-    val = (sign, qty, code)
+    sql = "UPDATE info SET quantity = quantity {} %s WHERE code = %s".format(sign)
+    val = (qty, code)
     mycursor.execute(sql, val)
     mydb.commit()
     mydb.close()
