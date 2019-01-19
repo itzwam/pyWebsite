@@ -109,15 +109,15 @@ def stockadd_page():
   code = request.form.get('code', None)
   qty = request.form.get('qty', None)
 
-  print('adding {qty} items to stock')
-  print('code : {} | qty : {}'.format(code, qty))
-
   print(json.dumps(request.form))
 
   if not request.form.get('add', None):
     fh = open('./datas/stock/addform.html', 'r')  
     return header + fh.read() + footer
 
+  print('adding {qty} items to stock')
+  print('code : {} | qty : {}'.format(code, qty))
+  
   return redirect("/")
 
 def apigetinfos_page():
