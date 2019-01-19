@@ -109,12 +109,10 @@ def stockadd_page():
   code = request.form.get('code', None)
   qty = request.form.get('qty', None)
 
-  print("code : {} | qty : {}".format(code, qty))
   if (not code) or (not qty):
     fh = open('./datas/stock/addform.html', 'r')  
     return header + fh.read() + footer
 
-  description = cgi.escape(description)
   print('adding {qty} items to stock')
   print('code : {} | qty : {}'.format(code, qty))
   
