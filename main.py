@@ -62,7 +62,7 @@ def addentry(code, description):
     mydb.commit()
     mydb.close()
   except Exception as e:
-    print(e)
+    logging.error(e)
     return 1
   print(mycursor.rowcount, "record inserted.")
 
