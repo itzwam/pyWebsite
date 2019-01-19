@@ -6,7 +6,8 @@ from flask import Flask, abort, request, Response, redirect
 import mysql.connector # pylint: disable=F0401
 import cgi
 import logging
-
+import requests
+import json
 
 header = open('./datas/header.html','r').read()
 footer = open('./datas/footer.html','r').read()
@@ -43,6 +44,8 @@ def getentry(code):
       'text' : "Il y a une erreur dans la base de donnée, merci de reessayer plus tard."
     }
 
+
+
 def addentry(code, description):
   try:
     mydb = mysql.connector.connect(
@@ -62,28 +65,10 @@ def addentry(code, description):
     return 1
   print(mycursor.rowcount, "record inserted.")
 
-app = Flask(__name__)
 
-@app.route('/', defaults={'path': 'index.html'}, methods=['GET','POST'])
-@app.route('/<path:path>', methods=['GET','POST'])
-def catch_all(path):  
-  print(path)
-  if path == "db/search":
-    return search_page()
-  if path == "db/add":
-    return add_page()
-  try:
-    fh = open('./datas/'+path, 'r')
-    if path[-5:] == '.html':
-      return header + fh.read() + footer
-    return fh.read()
-  except IOError  :
-    fh = open('./datas/404.html', 'r')
-    return header + fh.read() + footer
 
-def search_page():
+def dbsearch_page():
   query = request.args.get('code', None)
-  
 
   if not query:
     fh = open('./datas/database/searchform.html', 'r')  
@@ -100,7 +85,9 @@ def search_page():
   fh = open('./datas/database/searchresult.html')
   return header + fh.read().format(**answer) + footer
 
-def add_page():
+
+
+def dbadd_page():
   code = request.form.get('code', None)
   description = request.form.get('description', None)
 
@@ -114,6 +101,51 @@ def add_page():
   print('code : {} | desc : {}'.format(code, description))
   addentry(code, description)
   return redirect("/")
+
+
+
+def stockadd_page():
+  code = request.form.get('code', None)
+  qty = request.form.get('quantity', None)
+
+  print("code : {} | qty : {}".format(code, qty))
+  if (not code) or (not qty):
+    fh = open('./datas/stock/addform.html', 'r')  
+    return header + fh.read() + footer
+
+  description = cgi.escape(description)
+  print('adding {qty} items to stock')
+  print('code : {} | qty : {}'.format(code, qty))
+  
+  return redirect("/")
+
+
+
+app = Flask(__name__)
+@app.route('/', defaults={'path': 'index.html'}, methods=['GET','POST'])
+@app.route('/<path:path>', methods=['GET','POST'])
+def catch_all(path):  
+  print(path)
+  if path == "index.html":
+    catapi = requests.get("https://api.thecatapi.com/v1/images/search").json()[0]
+    fh = open('./datas/index.html', 'r')
+    return header + fh.read().format(**catapi) + footer
+  if path == "db/search":
+    return dbsearch_page()
+  if path == "db/add":
+    return dbadd_page()
+  if path == "stock/add":
+    return stockadd_page()
+  try:
+    fh = open('./datas/'+path, 'r')
+    if path[-5:] == '.html':
+      return header + fh.read() + footer
+    return fh.read()
+  except IOError  :
+    fh = open('./datas/404.html', 'r')
+    return header + fh.read() + footer
+
+
 
 if __name__ == '__main__':
   logging.basicConfig(filename=os.environ.get('BARCODE_HTTP_LOG','/dev/null'),level=logging.INFO)
