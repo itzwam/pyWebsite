@@ -137,7 +137,7 @@ def stock_page(remove=False):
     fh = open('./datas/stock/'+ file, 'r')
     return header + fh.read() + footer
 
-  qty = qty if len(qty) != 0 else 1 # qty = qty if defined, else default is 1
+  #qty = qty if len(qty) != 0 else 1 # qty = qty if defined, else default is 1
   qty = qty if not remove else -qty  # if remove => qty = -qty
   
   print('adding {} items to stock'.format(qty))
