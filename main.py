@@ -2,7 +2,7 @@
 # encoding=utf8  
 import sys
 import os
-from flask import Flask, abort, request, Response, redirect
+from flask import Flask, abort, request, Response, redirect, jsonify
 import mysql.connector # pylint: disable=F0401
 import cgi
 import logging
@@ -124,8 +124,8 @@ def apigetinfos_page():
 
   if not query:  
     return jsonify(
-      error=400
-      text="Malformed request, missing code"
+      error=400,
+      text="Malformed request: missing code"
     )
 
   answer = getentry(query)
