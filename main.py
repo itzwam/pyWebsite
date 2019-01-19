@@ -119,23 +119,39 @@ def stockadd_page():
   
   return redirect("/")
 
+def apigetinfos_page():
+  query = request.form.get('code', None)
 
+  if not query:  
+    return jsonify(
+      error=400
+      text="Malformed request, missing code"
+    )
+
+  answer = getentry(query)
+  
+  return json.dumps(answer)
 
 app = Flask(__name__)
 @app.route('/', defaults={'path': 'index.html'}, methods=['GET','POST'])
 @app.route('/<path:path>', methods=['GET','POST'])
 def catch_all(path):  
-  print(path)
   if path == "index.html":
     catapi = requests.get("https://api.thecatapi.com/v1/images/search").json()[0]
     fh = open('./datas/index.html', 'r')
     return header + fh.read().format(**catapi) + footer
+  
   if path == "db/search":
     return dbsearch_page()
   if path == "db/add":
     return dbadd_page()
+
   if path == "stock/add":
     return stockadd_page()
+
+  if path == "api/getinfos":
+    return apigetinfos_page()
+
   try:
     fh = open('./datas/'+path, 'r')
     if path[-5:] == '.html':
