@@ -1,47 +1,58 @@
 <main class="container">
-    <section class="mt-5">
-        <h2>Ajouter du stock</h2>
-        <!-- Formulaire -->
-        <form action="add" method="post">
-            <div class="form-group">
-                <label for="insert-code">Code</label>
-                <input type="text" class="form-control" id="insert-code" name="code" aria-describedby="code" placeholder="Entrez votre code" required>
-            </div>
-            <div class="form-group">
-                <label for="insert-description">Description</label>
-                <input type="text" class="form-control" id="insert-description" name="description" aria-describedby="description" placeholder="?" readonly>
-            </div>
-            <div class="form-group">
-                <label for="insert-qty">Quantité</label>
-                <input type="text" class="form-control" id="insert-qty" name="qty" aria-describedby="qty" placeholder="1">
-            </div>
-            <button type="submit" class="btn btn-success" name="go">Ajouter</button>
-        </form>
-    </section>
-</main>
-<script type="text/javascript">
-$("#insert-code").blur(function(){
-    console.log("blahblah")
-
-    $.ajax({
-        url:"/api/getinfos",
-        method:"POST",
-
-        data:{
-            code: $("#insert-code").val(),
-        },
-        success:function(response) {
-            obj = JSON.parse(response)
-            if (obj.error == null && obj.description !== null) {
-                $("#insert-description").attr("placeholder", obj.description + ' Stock: ' + obj.quantity);
+        <section class="mt-5">
+            <h2>Enlever du stock</h2>
+            <!-- Formulaire -->
+            <form action="add" method="post">
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <label for="insert-code">Code</label>
+                        <input type="text" class="form-control" id="insert-code" name="code" aria-describedby="code" placeholder="Entrez votre code" required>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="insert-qty">Quantité a ajouter</label>
+                        <input type="text" class="form-control" id="insert-qty" name="qty" aria-describedby="qty" placeholder="1">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <label for="actual-description">Objet</label>
+                        <input type="text" class="form-control" id="actual-description" name="" aria-describedby="description" placeholder="?" readonly>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="actual-qty">Quantité actuelle</label>
+                        <input type="text" class="form-control" id="actual-qty" name="" aria-describedby="qty" placeholder="?" readonly>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success" name="go">Ajouter</button>
+            </form>
+        </section>
+    </main>
+    <script type="text/javascript">
+    $("#insert-code").blur(function(){
+        console.log("blahblah")
+    
+        $.ajax({
+                url:"/api/getinfos",
+                method:"POST",
+    
+                data:{
+                    code: $("#insert-code").val(),
+                },
+                success:function(response) {
+                    obj = JSON.parse(response)
+                    if (obj.error == null) {
+                        $("#actual-description").attr("placeholder", obj.description);
+                        $("#actual-qty").attr("placeholder", obj.quantity);
+                    }
+                    else {
+                        $("#actual-description").attr("placeholder", "?");
+                        $("#actual-qty").attr("placeholder", "?");
+                    }
+                },
+                error:function(){
+                    $("#actual-description").attr("placeholder", "?");
+                    $("#actual-qty").attr("placeholder", "?");
             }
-            else {
-                $("#insert-description").attr("placeholder", "?");
-            }
-        },
-        error:function(){
-            $("#insert-description").attr("placeholder", "?");
-       }
-    })
-});
-</script>
+            })
+    });
+    </script>
