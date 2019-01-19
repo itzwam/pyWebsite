@@ -20,6 +20,10 @@
         </section>
     </main>
     <script type="text/javascript">
+    $("#insert-code").blur(function(){
+        $('#go').trigger('click');
+    });
+
     $("#go").click(function(){
         $.ajax({
             url:"/api/getinfos",
