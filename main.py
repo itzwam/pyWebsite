@@ -107,8 +107,9 @@ def dbadd_page():
 
 def stockadd_page():
   code = request.form.get('code', None)
-  qty = request.form.get('qty', 1)
-  
+  qty = request.form.get('qty', 666)
+  print(qty)
+
   print('adding {qty} items to stock')
   print('code : {} | qty : {}'.format(code, qty))
 
