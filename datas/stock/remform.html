@@ -13,7 +13,8 @@
                 </div>
               </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="actual-description" name="" aria-describedby="description" placeholder="Description" readonly>
+                <label for="actual-description">Objet</label>
+                <input type="text" class="form-control" id="actual-description" name="" aria-describedby="description" placeholder="?" readonly>
             </div>
             <div class="form-group">
                 <label for="insert-qty">Quantité</label>
@@ -41,12 +42,12 @@ $("#insert-code").blur(function(){
                     $("#actual-qty").attr("placeholder", obj.quantity);
                 }
                 else {
-                    $("#actual-description").attr("placeholder", "Description ?");
+                    $("#actual-description").attr("placeholder", "?");
                     $("#actual-qty").attr("placeholder", "Qty ?");
                 }
             },
             error:function(){
-                $("#actual-description").attr("placeholder", "Description ?");
+                $("#actual-description").attr("placeholder", "?");
                 $("#actual-qty").attr("placeholder", "Qty ?");
         }
         })
