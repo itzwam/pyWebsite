@@ -56,8 +56,8 @@ def addentry(code, description):
       database=os.environ.get('BARCODE_MYSQL_DBNAME')
     )
     mycursor = mydb.cursor()
-    sql = "INSERT INTO info (code, description) VALUES (%s, %s)"
-    val = (code, description)
+    sql = "INSERT INTO info (code, description) VALUES (%s, %s) ON DUPLICATE KEY UPDATE description=%s"
+    val = (code, description, description)
     mycursor.execute(sql, val)
     mydb.commit()
     mydb.close()
