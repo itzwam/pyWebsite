@@ -115,7 +115,8 @@ def stockadd_page():
     fh = open('./datas/stock/addform.html', 'r')  
     return header + fh.read() + footer
 
-  print('adding {qty} items to stock')
+  qty = qty if len(qty) != 0 else 1 # qty = qty if defined, else default is 1
+  print('adding {} items to stock'.format(qty))
   print('code : {} | qty : {}'.format(code, qty))
 
   return redirect("/")
