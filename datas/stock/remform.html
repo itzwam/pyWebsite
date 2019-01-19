@@ -9,13 +9,11 @@
                     <input type="text" class="form-control" id="insert-code" name="code" aria-describedby="code" placeholder="Entrez votre code" required>
                 </div>
                 <div class="col">
-                    <label for="actual-qty">Quantité actuelle</label>
-                    <input type="text" class="form-control" id="actual-qty" name="" aria-describedby="qty" placeholder="?" readonly>
+                    <input type="text" class="form-control" id="actual-qty" name="" aria-describedby="qty" placeholder="Qty" readonly>
                 </div>
               </div>
             <div class="form-group">
-                <label for="actual-description">Description</label>
-                <input type="text" class="form-control" id="actual-description" name="" aria-describedby="description" placeholder="?" readonly>
+                <input type="text" class="form-control" id="actual-description" name="" aria-describedby="description" placeholder="Description" readonly>
             </div>
             <div class="form-group">
                 <label for="insert-qty">Quantité</label>
@@ -43,13 +41,13 @@ $("#insert-code").blur(function(){
                     $("#actual-qty").attr("placeholder", obj.quantity);
                 }
                 else {
-                    $("#actual-description").attr("placeholder", "?");
-                    $("#actual-qty").attr("placeholder", "?");
+                    $("#actual-description").attr("placeholder", "Description ?");
+                    $("#actual-qty").attr("placeholder", "Qty ?");
                 }
             },
             error:function(){
-                $("#actual-description").attr("placeholder", "?");
-                $("#actual-qty").attr("placeholder", "?");
+                $("#actual-description").attr("placeholder", "Description ?");
+                $("#actual-qty").attr("placeholder", "Qty ?");
         }
         })
 });
