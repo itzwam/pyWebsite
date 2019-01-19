@@ -1,1 +1,40 @@
-It Works
+<main class="container">
+    <section class="mt-5">
+        <h2>Ajouter du stock</h2>
+        <!-- Formulaire -->
+        <form action="add" method="post">
+            <div class="form-group">
+                <label for="insert-code">Code</label>
+                <input type="text" class="form-control" id="insert-code" name="code" aria-describedby="code" placeholder="Entrez votre code" required>
+            </div>
+            <div class="form-group">
+                <label for="insert-description">Description</label>
+                <input type="text" class="form-control" id="insert-description" name="description" aria-describedby="description" placeholder="?" readonly>
+            </div>
+            <div class="form-group">
+                <label for="insert-qty">Quantité</label>
+                <input type="text" class="form-control" id="insert-qty" name="qty" aria-describedby="qty" placeholder="1">
+            </div>
+            <button type="submit" class="btn btn-success">Ajouter</button>
+        </form>
+    </section>
+</main>
+
+<!--
+
+    $.ajax({
+        url:"/api/getinfos",
+        method:"POST", //First change type to method here
+
+        data:{
+          code: "666", // Second add quotes on the value.
+        },
+        success:function(response) {
+         console.log(response);
+       },
+       error:function(){
+        console.log("error");
+       }
+    })
+
+-->
