@@ -107,7 +107,7 @@ def dbadd_page():
 
 def stockadd_page():
   code = request.form.get('code', None)
-  qty = request.form.get('quantity', None)
+  qty = request.form.get('qty', None)
 
   print("code : {} | qty : {}".format(code, qty))
   if (not code) or (not qty):
