@@ -119,13 +119,7 @@ def updatestock(code, qty):
 
 
 
-def dbsearch_page():
-  query = request.args.get('code', None)
-
-  if not query:
-    fh = open('./datas/database/searchform.html', 'r')  
-    return header + fh.read() + footer
-
+def dblist_page():
   answer = getallentries()
   error = None
   try:
@@ -140,11 +134,11 @@ def dbsearch_page():
 
   table = ""
   for x in answer:
-    table += "<tr>"
-    table += "<th scope='row'>{code}</th>".format(**x)
-    table += "<td>{description}</td>".format(**x)
-    table += "<td>{quantity}</td>".format(**x)
-    table += "</tr>"
+    table += "<tr>" + '\n'
+    table += "<th scope='row'>{code}</th>".format(**x) + '\n'
+    table += "<td>{description}</td>".format(**x) + '\n'
+    table += "<td>{quantity}</td>".format(**x) + '\n'
+    table += "</tr>" + '\n'
   
   fh = open('./datas/database/searchresult.html')
   return header + fh.read().format(entries=table) + footer
@@ -204,8 +198,8 @@ def catch_all(path):
     fh = open('./datas/index.html', 'r')
     return header + fh.read() + footer
   
-  if path == "db/search":
-    return dbsearch_page()
+  if path == "db/list":
+    return dblist_page()
   if path == "db/add":
     return dbadd_page()
 
