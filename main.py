@@ -140,7 +140,7 @@ def dblist_page():
     table += "<td>{quantity}</td>".format(**x) + '\n'
     table += "</tr>" + '\n'
   
-  fh = open('./datas/database/searchresult.html')
+  fh = open('./datas/database/itemlist.html')
   return header + fh.read().format(entries=table) + footer
 
 
