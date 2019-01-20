@@ -1,11 +1,30 @@
     <main class="container mt-4">
-        <div class="card" style="width: 50rem;">
-            <div class="card-body">
-                <h5 class="card-title">{code}</h5>
-                <!-- Object ID in database: {id} -->
-                <p class="card-text">{description}</p>
-                <p class="card-text">En stock : {quantity}</p>
-                <a href="/index.html" class="card-link">Revenir à l'accueil</a>
-            </div>
-        </div>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Objet</th>
+                <th scope="col">Quantité</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{code}</th>
+                <td>{description}</td>
+                <td>{quantity}</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
     </main>
