@@ -126,7 +126,7 @@ def dbsearch_page():
     fh = open('./datas/database/searchform.html', 'r')  
     return header + fh.read() + footer
 
-  answer = getentry(query)
+  answer = getallentries()
   error = answer.get('error',False)
 
   table = ""
