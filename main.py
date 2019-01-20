@@ -127,7 +127,6 @@ def dbsearch_page():
     return header + fh.read() + footer
 
   answer = getallentries()
-  error = answer.get('error',False)
 
   table = ""
   for x in answer:
@@ -136,11 +135,6 @@ def dbsearch_page():
     table += "<td>{description}</td>".format(**x)
     table += "<td>{quantity}</td>".format(**x)
     table += "</tr>"
-  
-  if error:
-    errortext=answer.get('text','Unknow error')
-    fh = open('./datas/database/searchresult.err.html')
-    return header + fh.read().format(error=errortext) + footer
   
   fh = open('./datas/database/searchresult.html')
   return header + fh.read().format(entries=table) + footer
