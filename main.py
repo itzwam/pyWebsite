@@ -129,7 +129,7 @@ def dbsearch_page():
   answer = getallentries()
   try:
     error = answer.get('error', None)
-  except TypeError:
+  except AttributeError, TypeError:
     pass
 
   if error:
