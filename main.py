@@ -127,6 +127,15 @@ def dbsearch_page():
     return header + fh.read() + footer
 
   answer = getallentries()
+  try:
+    error = answer.get('error', None)
+  except TypeError:
+    pass
+
+  if error:
+    errortext=answer.get('text','Unknow error')
+    fh = open('./datas/error.html')
+    return header + fh.read().format(error=err+" - "+errortext) + footer  
 
   table = ""
   for x in answer:
@@ -213,8 +222,8 @@ def catch_all(path):
       return header + fh.read() + footer
     return fh.read()
   except IOError  :
-    fh = open('./datas/404.html', 'r')
-    return header + fh.read() + footer
+    fh = open('./datas/error.html', 'r')
+    return header + fh.read().format(error="404 - Page not found") + footer
 
 
 
