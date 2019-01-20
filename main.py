@@ -45,6 +45,40 @@ def getentry(code):
       'text' : "Il y a une erreur dans la base de donnée, merci de reessayer plus tard."
     }
 
+def getallentries():
+  try :
+    mydb = mysql.connector.connect(
+      host=os.environ.get('BARCODE_MYSQL_HOST'),
+      user=os.environ.get('BARCODE_MYSQL_USER'),
+      passwd=os.environ.get('BARCODE_MYSQL_PASS'),
+      database=os.environ.get('BARCODE_MYSQL_DBNAME')
+    )
+    mycursor = mydb.cursor()
+    mycursor.execute("SELECT id, code, description, quantity FROM info")
+    result = mycursor.fetchall()
+    output = []
+    mydb.close()
+    for x in result:
+      output += [{
+      'id' : x[0],
+      'code' : x[1],
+      'description' : x[2],
+      'quantity' : x[3],
+    }]
+    print(json.dumps(output, indent=2))
+    return output
+  except IndexError:
+    return {
+      'error': 404,
+      'text' : "Le code n'a pas été trouvé dans la base de donnée"
+    }
+  except Exception as e:
+    logging.error(e)
+    return {
+      'error': 500,
+      'text' : "Il y a une erreur dans la base de donnée, merci de reessayer plus tard."
+    }
+
 
 
 def addentry(code, description):
@@ -94,6 +128,14 @@ def dbsearch_page():
 
   answer = getentry(query)
   error = answer.get('error',False)
+
+  table = ""
+  for x in answer:
+    table += "<tr>"
+    table += "<th scope='row'>{code}</th>".format(**x)
+    table += "<td>{description}</td>".format(**x)
+    table += "<td>{quantity}</td>".format(**x)
+    table += "</tr>"
   
   if error:
     errortext=answer.get('text','Unknow error')
@@ -101,7 +143,7 @@ def dbsearch_page():
     return header + fh.read().format(error=errortext) + footer
   
   fh = open('./datas/database/searchresult.html')
-  return header + fh.read().format(**answer) + footer
+  return header + fh.read().format(entries=table) + footer
 
 
 
