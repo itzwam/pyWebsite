@@ -134,10 +134,10 @@ def dblist_page():
 
   table = ""
   for x in answer:
-    table += "<tr>" + '\n'
-    table += "<th scope='row'>{code}</th>".format(**x) + '\n'
-    table += "<td>{description}</td>".format(**x) + '\n'
-    table += "<td>{quantity}</td>".format(**x) + '\n'
+    table += "                " + "<tr>"
+    table += "<th scope='row'>{code}</th>".format(**x)
+    table += "<td>{description}</td>".format(**x)
+    table += "<td>{quantity}</td>".format(**x)
     table += "</tr>" + '\n'
   
   fh = open('./datas/database/itemlist.html')
