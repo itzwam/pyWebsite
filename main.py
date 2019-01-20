@@ -6,7 +6,6 @@ from flask import Flask, abort, request, Response, redirect, jsonify
 import mysql.connector # pylint: disable=F0401
 import cgi
 import logging
-import requests
 import json
 
 header = open('./datas/header.html','r').read()
@@ -45,6 +44,8 @@ def getentry(code):
       'text' : "Il y a une erreur dans la base de donnée, merci de reessayer plus tard."
     }
 
+
+
 def getallentries():
   try :
     mydb = mysql.connector.connect(
@@ -65,7 +66,6 @@ def getallentries():
       'description' : x[2],
       'quantity' : x[3],
     }]
-    print(json.dumps(output, indent=2))
     return output
   except IndexError:
     return {
@@ -177,6 +177,8 @@ def stock_page(remove=False):
 
   return redirect("/")
 
+
+
 def apigetinfos_page():
   query = request.form.get('code', None)
 
@@ -187,8 +189,9 @@ def apigetinfos_page():
     })
 
   answer = getentry(query)
-  
   return json.dumps(answer)
+
+
 
 app = Flask(__name__)
 @app.route('/', defaults={'path': 'index.html'}, methods=['GET','POST'])
