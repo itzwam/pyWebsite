@@ -127,6 +127,7 @@ def dbsearch_page():
     return header + fh.read() + footer
 
   answer = getallentries()
+  error = None
   try:
     error = answer.get('error', None)
   except AttributeError, TypeError:
