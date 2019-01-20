@@ -135,7 +135,7 @@ def dbsearch_page():
   if error:
     errortext=answer.get('text','Unknow error')
     fh = open('./datas/error.html')
-    return header + fh.read().format(error=err+" - "+errortext) + footer  
+    return header + fh.read().format(error=error+" - "+errortext) + footer  
 
   table = ""
   for x in answer:
