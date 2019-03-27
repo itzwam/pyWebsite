@@ -135,7 +135,7 @@ def dblist_page():
   table = ""
   for x in answer:
     table += "                " + "<tr>"
-    table += "<th scope='row'>{code}</th>".format(**x)
+    table += "<td scope='row'>{code}</td>".format(**x)
     table += "<td>{description}</td>".format(**x)
     table += "<td>{quantity}</td>".format(**x)
     table += "</tr>" + '\n'
